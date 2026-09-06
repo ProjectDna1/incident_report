@@ -19,10 +19,18 @@ const userSchema = new mongoose.Schema({
         minlength:6,
     },
 
-    image:{
+    profilePic: {
         type: String,
         default: "",
     },
+
+    role: {
+      type: String,
+      enum: ["user", "admin", "investigator"],
+      default: "user",
+    },
+
+
 }, { timestamps: true } // created at updated at
 );
 

@@ -7,6 +7,7 @@ import OnlineReportingCard from "../components/OnlineReportingCard";
 import ProcessSteps from "../components/ProcessSteps";
 import DashboardFooter from "../components/DashboardFooter";
 import EmergencyModal from "../components/EmergencyModal";
+import EmergencyContacts from "../components/EmergencyContacts";
 
 function UserDashboard() {
   const [showEmergencyModal, setShowEmergencyModal] = useState(false);

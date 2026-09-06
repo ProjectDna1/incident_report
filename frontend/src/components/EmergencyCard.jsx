@@ -1,77 +1,56 @@
-import {
-  Ambulance,
-  Phone,
-} from "lucide-react";
+import { Phone, ShieldAlert } from "lucide-react";
 
-function EmergencyCard({ onCall }) {
+function EmergencyCard() {
+  const handleEmergencyCall = () => {
+    const confirmed = window.confirm(
+      "Do you want to call emergency services?"
+    );
+
+    if (!confirmed) return;
+
+    window.location.href = "tel:10111";
+  };
+
   return (
-    <div className="rounded-[6px] border border-[#f2d5d5] bg-[#fff1f1] p-4 sm:p-5">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
-      {/* Heading */}
-      <div className="flex items-start gap-2.5">
-
-        <div className="flex h-[25px] w-[25px] shrink-0 items-center justify-center rounded-[5px] bg-[#e52420] sm:h-[30px] sm:w-[30px]">
-          <Ambulance
-            size={15}
-            className="text-white sm:h-[17px] sm:w-[17px]"
-          />
-        </div>
+      {/* Header */}
+      <div className="flex items-center justify-between">
 
         <div>
-          <p className="text-[6px] font-bold uppercase tracking-[0.4px] text-[#e52420] sm:text-[7px]">
-            CRITICAL ACTION
-          </p>
+          <h2 className="text-lg font-bold text-slate-900">
+            Emergency Assistance
+          </h2>
 
-          <h3 className="mt-[2px] text-[11px] font-bold text-[#10243e] sm:text-[14px]">
-            Emergency / Get Help Now
-          </h3>
+          <p className="mt-1 text-sm text-slate-500">
+            Need immediate assistance?
+          </p>
+        </div>
+
+        <div className="rounded-full bg-red-100 p-3">
+          <ShieldAlert
+            size={24}
+            className="text-red-600"
+          />
         </div>
 
       </div>
 
-      {/* Description */}
-      <p className="mt-4 text-[7px] leading-[1.55] text-[#536276] sm:text-[9px]">
-        Is anyone currently in danger? Is there an active crime scene,
-        fire, or a severe medical crisis happening right now? Stop this
-        form and call emergency services immediately.
-      </p>
+      {/* Emergency Call Button */}
+      <button
+        onClick={handleEmergencyCall}
+        className="mt-5 flex w-full items-center justify-center gap-3 rounded-xl bg-red-600 px-5 py-4 font-semibold text-white transition hover:bg-red-700 active:scale-[0.98]"
+      >
+        <Phone size={22} />
 
-      {/* Emergency Numbers */}
-      <div className="mt-4 w-fit overflow-hidden rounded-[5px] border border-[#ffb4b4] bg-white">
+        Emergency Call
+      </button>
 
-        {/* Police */}
-        <div className="flex items-center justify-between gap-6 border-b border-[#f1dddd] px-2 py-2 sm:gap-10 sm:px-3">
-          <span className="text-[7px] font-semibold text-[#172235] sm:text-[8px]">
-            Police Emergency Services
-          </span>
-
-          <span className="text-[10px] font-extrabold text-[#ed2929] sm:text-[11px]">
-            10111
-          </span>
-        </div>
-
-        {/* Ambulance */}
-        <div className="flex items-center justify-between gap-6 px-2 py-2 sm:gap-10 sm:px-3">
-          <span className="text-[7px] font-semibold text-[#172235] sm:text-[8px]">
-            Medical / Ambulance
-          </span>
-
-          <span className="text-[10px] font-extrabold text-[#ed2929] sm:text-[11px]">
-            10177
-          </span>
-        </div>
-
-        {/* Call Button */}
-        <div className="border-t border-[#f1dddd] px-2 py-2 sm:px-3">
-          <button
-            onClick={onCall}
-            className="flex w-full items-center justify-center gap-1 rounded-[4px] bg-[#ed2929] px-4 py-2 text-[8px] font-bold text-white transition hover:bg-[#d92323] sm:text-[9px]"
-          >
-            <Phone size={11} />
-            Call Emergency Services
-          </button>
-        </div>
-
+      {/* Warning */}
+      <div className="mt-4 rounded-lg bg-red-50 p-3">
+        <p className="text-xs text-red-700">
+          Only use emergency services when immediate assistance is required.
+        </p>
       </div>
 
     </div>

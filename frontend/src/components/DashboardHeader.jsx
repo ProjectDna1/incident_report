@@ -1,7 +1,12 @@
-import { Shield } from "lucide-react";
+import { Shield, LogOutIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore";
+
 
 function DashboardHeader() {
+
+const { logout, authUser, updateProfile } = useAuthStore();
+
   return (
     <header className="h-[35px] border-b border-[#e5e9ed] bg-white">
       <div className="mx-auto flex h-full max-w-[680px] items-center justify-between px-3 sm:max-w-[950px] lg:max-w-[1170px]">
@@ -57,6 +62,15 @@ function DashboardHeader() {
             OFFICIAL PORTAL
           </span>
 
+          {/* LOGOUT BUTTON */}
+          <div className="flex gap-4 items-center">
+            <button
+             className="text-slate-400 hover:text-slate-200 transition-colors" 
+             onClick={logout}
+            >
+              <LogOutIcon className="size-5" />
+             </button>
+          </div>
         </nav>
 
       </div>
