@@ -77,7 +77,7 @@ export const useAuthStore = create((set) => ({
       );
     } finally {
       set({
-        isLogingIn: false,
+        isLoggingIn: false,
       });
     }
   },
