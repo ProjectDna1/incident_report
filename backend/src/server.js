@@ -6,8 +6,9 @@ import cors from "cors";
 import { ENV } from "./lib/env.js";
 
 import authRoutes from "./routes/auth.route.js";
-import messageRoutes from "./routes/message.route.js";
 import adminRoutes from "./routes/admin.route.js";
+import incidentRoutes from "./routes/incident.route.js";
+import assignmentRoutes from "./routes/assignment.route.js";
 
 import { connectDB } from "./lib/db.js";
 
@@ -29,8 +30,10 @@ app.use(
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
-app.use("/api/messages", messageRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/incidents", incidentRoutes);
+app.use("/api/assignments", assignmentRoutes);
+
 
 if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));

@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import UserDashboard from "./pages/UserDashboard";
-import AdminDashboard from "./pages/AdminDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import InvestigatorDashboard from "./pages/InvestigatorDashboard";
 
 import { useAuthStore } from "./store/useAuthStore";
