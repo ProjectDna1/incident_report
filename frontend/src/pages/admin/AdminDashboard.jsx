@@ -8,12 +8,12 @@ import {
   BarChart3,
 } from "lucide-react";
 
-import AdminSidebar from "../components/admin/AdminSidebar";
-import AdminHeader from "../components/admin/AdminHeader";
-import StatCard from "../components/admin/StatCard";
-import IncidentTable from "../components/admin/IncidentTable";
-import ActionCard from "../components/admin/ActionCard";
-import ReportsTrend from "../components/admin/ReportsTrend";
+import AdminSidebar from "../../components/admin/AdminSidebar";
+import AdminHeader from "../../components/admin/AdminHeader";
+import StatCard from "../../components/admin/StatCard";
+import IncidentTable from "../../components/admin/IncidentTable";
+import ActionCard from "../../components/admin/ActionCard";
+import ReportsTrend from "../../components/admin/ReportsTrend";
 
 const incidents = [
   {
