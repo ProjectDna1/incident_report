@@ -19,6 +19,18 @@ export const getUsers = async (req, res) => {
     }
 }
 
+
+export const getInvestigators = async (req, res) => {
+  try {
+    const investigators = await User.find({ role: "investigator" }).select("-password").sort({ createdAt: -1 });
+
+    res.status(200).json({ investigators });
+  } catch (error) {
+    console.error("Error getting investigators:", error);
+    res.status(500).json({ message: "Failed to get investigators" });
+  }
+};
+
 export const deleteUser = async (req, res) => {
     try {
           const user = await User.findByIdAndDelete(req.params.id);

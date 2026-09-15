@@ -28,8 +28,8 @@ export default function AdminLayout() {
       return "Reports";
     }
 
-    if (location.pathname.includes("/users")) {
-      return "Users";
+    if (location.pathname.includes("/investigators")) {
+      return "Investigators";
     }
 
     if (location.pathname.includes("/audit")) {

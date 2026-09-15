@@ -19,7 +19,7 @@ const navigation = [
   { name: "Progress Updates", icon: Activity, path: "/admin/progress" },
   { name: "Evidence", icon: FolderOpen, path: "/admin/evidence" },
   { name: "Reports", icon: BarChart3, path: "/admin/reports" },
-  { name: "Users", icon: Users, path: "/admin/users" },
+  { name: "Investigators", icon: UserCheck, path: "/admin/investigators" },
   { name: "Audit Log", icon: Shield, path: "/admin/audit" },
 ];
 

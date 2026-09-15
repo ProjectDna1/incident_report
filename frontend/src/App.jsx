@@ -5,12 +5,13 @@ import { Toaster } from "react-hot-toast";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import UserDashboard from "./pages/UserDashboard";
-import InvestigatorDashboard from "./pages/InvestigatorDashboard";
+import InvestigatorDashboard from "./pages/investigators/InvestigatorDashboard";
 
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AssignmentHub from "./pages/admin/AssignmentHub";
 import ProgressUpdates from "./pages/admin/ProgressUpdates";
+import Investigators from "./pages/admin/Investigators";
 
 import { useAuthStore } from "./store/useAuthStore";
 import PageLoader from "./components/PageLoader";
@@ -33,6 +34,8 @@ function App() {
   return (
     <>
       <Routes>
+
+        {/* DEFAULT */}
         <Route
           path="/"
           element={
@@ -48,6 +51,7 @@ function App() {
           }
         />
 
+        {/* USER */}
         <Route
           path="/user"
           element={
@@ -59,6 +63,7 @@ function App() {
           }
         />
 
+        {/* ADMIN */}
         <Route
           path="/admin"
           element={
@@ -80,8 +85,14 @@ function App() {
             path="progress"
             element={<ProgressUpdates />}
           />
+
+          <Route
+            path="investigators"
+            element={<Investigators />}
+          />
         </Route>
 
+        {/* INVESTIGATOR */}
         <Route
           path="/investigator"
           element={
@@ -93,14 +104,18 @@ function App() {
           }
         />
 
+        {/* LOGIN */}
         <Route
           path="/login"
           element={
             !authUser ? (
               <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-900 p-4">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]" />
+
                 <div className="absolute -left-4 top-0 size-96 bg-pink-500 opacity-20 blur-[100px]" />
+
                 <div className="absolute -right-4 bottom-0 size-96 bg-cyan-500 opacity-20 blur-[100px]" />
+
                 <LoginPage />
               </div>
             ) : (
@@ -109,14 +124,18 @@ function App() {
           }
         />
 
+        {/* SIGN UP */}
         <Route
           path="/signup"
           element={
             !authUser ? (
               <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-900 p-4">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]" />
+
                 <div className="absolute -left-4 top-0 size-96 bg-pink-500 opacity-20 blur-[100px]" />
+
                 <div className="absolute -right-4 bottom-0 size-96 bg-cyan-500 opacity-20 blur-[100px]" />
+
                 <SignUpPage />
               </div>
             ) : (
@@ -124,6 +143,7 @@ function App() {
             )
           }
         />
+
       </Routes>
 
       <Toaster />

@@ -11,6 +11,7 @@ import incidentRoutes from "./routes/incident.route.js";
 import assignmentRoutes from "./routes/assignment.route.js";
 import caseUpdateRoutes from "./routes/caseUpdate.route.js";
 
+
 import { connectDB } from "./lib/db.js";
 
 const app = express();
