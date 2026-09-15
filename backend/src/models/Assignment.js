@@ -10,11 +10,12 @@ const assignmentSchema = new mongoose.Schema(
     },
 
     // Investigator receiving the assignment
-    investigator: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+  investigator: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "User",
+  required: false,
+  default: null,
+},
 
     // Admin who made the assignment
     assignedBy: {
@@ -24,11 +25,18 @@ const assignmentSchema = new mongoose.Schema(
     },
 
     // Assignment status
-    status: {
-      type: String,
-      enum: ["Assigned", "Accepted", "In Progress", "Completed", "Cancelled"],
-      default: "Assigned",
-    },
+status: {
+  type: String,
+  enum: [
+    "Unassigned",
+    "Assigned",
+    "Accepted",
+    "In Progress",
+    "Completed",
+    "Cancelled",
+  ],
+  default: "Unassigned",
+},
 
     // Optional instructions from the admin
     instructions: {
