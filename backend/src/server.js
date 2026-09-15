@@ -9,6 +9,7 @@ import authRoutes from "./routes/auth.route.js";
 import adminRoutes from "./routes/admin.route.js";
 import incidentRoutes from "./routes/incident.route.js";
 import assignmentRoutes from "./routes/assignment.route.js";
+import caseUpdateRoutes from "./routes/caseUpdate.route.js";
 
 import { connectDB } from "./lib/db.js";
 
@@ -33,6 +34,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/incidents", incidentRoutes);
 app.use("/api/assignments", assignmentRoutes);
+app.use("/api/case-updates", caseUpdateRoutes);
 
 
 if (ENV.NODE_ENV === "production") {

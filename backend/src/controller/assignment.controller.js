@@ -2,17 +2,16 @@ import Assignment from "../models/Assignment.js";
 import Incident from "../models/Incident.js";
 import User from "../models/User.js";
 
-// CREATE ASSIGNMENT
-// Admin assigns an incident to an investigator
-// POST /api/assignments
+
+// Create Assignment
 export const createAssignment = async (req, res) => {
   try {
     const { incidentId, investigatorId, instructions } = req.body;
 
-    // Check required fields
-    if (!incidentId || !investigatorId) {
+    // Incident is always required
+    if (!incidentId) {
       return res.status(400).json({
-        message: "Incident and investigator are required",
+        message: "Incident is required",
       });
     }
 
@@ -25,56 +24,69 @@ export const createAssignment = async (req, res) => {
       });
     }
 
-    // Check that the investigator exists
-    const investigator = await User.findById(investigatorId);
+    // Investigator is optional
+    let investigator = null;
 
-    if (!investigator) {
-      return res.status(404).json({
-        message: "Investigator not found",
-      });
+    if (investigatorId) {
+      investigator = await User.findById(investigatorId);
+
+      if (!investigator) {
+        return res.status(404).json({
+          message: "Investigator not found",
+        });
+      }
+
+      if (investigator.role !== "investigator") {
+        return res.status(400).json({
+          message: "Selected user is not an investigator",
+        });
+      }
     }
 
-    // Make sure the selected user is actually an investigator
-    if (investigator.role !== "investigator") {
-      return res.status(400).json({
-        message: "Selected user is not an investigator",
-      });
-    }
-
-    // Check if the incident already has an active assignment
+    // Prevent duplicate active assignments
     const existingAssignment = await Assignment.findOne({
       incident: incidentId,
       status: {
-        $in: ["Assigned", "Accepted", "In Progress"],
+        $in: [
+          "Unassigned",
+          "Assigned",
+          "Accepted",
+          "In Progress",
+        ],
       },
     });
 
     if (existingAssignment) {
       return res.status(400).json({
-        message: "This incident is already assigned to an investigator",
+        message: "This incident already has an active assignment",
       });
     }
 
     // Create assignment
     const assignment = await Assignment.create({
       incident: incidentId,
-      investigator: investigatorId,
+      investigator: investigatorId || null,
       assignedBy: req.user._id,
       instructions: instructions || "",
+      status: investigatorId ? "Assigned" : "Unassigned",
     });
 
     // Update incident status
-    incident.status = "Assigned";
+    incident.status = investigatorId ? "Assigned" : "Pending";
     await incident.save();
 
-    // Return assignment with useful information
-    const populatedAssignment = await Assignment.findById(assignment._id)
+    // Return populated assignment
+    const populatedAssignment = await Assignment.findById(
+      assignment._id
+    )
       .populate("incident")
       .populate("investigator", "fullName email role")
       .populate("assignedBy", "fullName email");
 
     res.status(201).json({
-      message: "Incident assigned successfully",
+      message: investigatorId
+        ? "Incident assigned successfully"
+        : "Incident added to unassigned queue",
       assignment: populatedAssignment,
     });
   } catch (error) {

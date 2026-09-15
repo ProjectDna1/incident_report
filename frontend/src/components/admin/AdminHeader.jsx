@@ -1,48 +1,85 @@
-import React from "react";
 import { HelpCircle, X } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
-const AdminHeader = ({
-  title = "Officer Command Center",
-  description = "Summary status and active cases for SAPS community reporting framework",
-}) => {
+export default function AdminHeader() {
+  const location = useLocation();
+
+  const pageInfo = {
+    "/admin": {
+      title: "Admin Dashboard",
+      subtitle: "Community incident administration and case management",
+    },
+
+    "/admin/assignments": {
+      title: "Assignments",
+      subtitle: "Assign incidents to authorized investigators",
+    },
+
+    "/admin/progress-updates": {
+      title: "Record Case Progress",
+      subtitle: "Authorized SAPS administrative updates and investigation history",
+    },
+
+    "/admin/cases": {
+      title: "Cases",
+      subtitle: "Review and manage reported incidents",
+    },
+
+    "/admin/evidence": {
+      title: "Evidence",
+      subtitle: "Manage evidence associated with active cases",
+    },
+
+    "/admin/reports": {
+      title: "Reports",
+      subtitle: "Review incident and case statistics",
+    },
+
+    "/admin/users": {
+      title: "Users",
+      subtitle: "Manage system users and access",
+    },
+
+    "/admin/audit-log": {
+      title: "Audit Log",
+      subtitle: "Review authorized system activity",
+    },
+  };
+
+  const current =
+    Object.entries(pageInfo).find(([path]) =>
+      location.pathname.startsWith(path)
+    )?.[1] || pageInfo["/admin"];
+
   return (
-    <header className="relative h-[74px] bg-white border-b border-slate-200 px-6 flex items-center justify-between">
+    <header className="border-b border-slate-200 bg-white px-7 py-4">
 
-      {/* Top government-style line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] flex">
+      <div className="flex items-start justify-between">
 
-        <div className="w-1/5 bg-red-600" />
-        <div className="w-1/5 bg-emerald-600" />
-        <div className="w-1/5 bg-blue-700" />
-        <div className="w-1/5 bg-yellow-500" />
-        <div className="w-1/5 bg-black" />
+        <div>
+          <h1 className="text-xl font-bold text-slate-900">
+            {current.title}
+          </h1>
 
-      </div>
+          <p className="mt-1 text-xs text-slate-500">
+            {current.subtitle}
+          </p>
+        </div>
 
-      <div>
-        <h1 className="text-[17px] font-bold text-[#122a49]">
-          {title}
-        </h1>
+        <div className="flex gap-3">
 
-        <p className="text-[8px] text-slate-500 mt-1">
-          {description}
-        </p>
-      </div>
+          <button className="flex h-7 w-7 items-center justify-center rounded-full border border-slate-300 text-slate-500 hover:bg-slate-100">
+            <X size={13} />
+          </button>
 
-      <div className="flex items-center gap-2">
+          <button className="flex h-7 w-7 items-center justify-center rounded-full border border-slate-300 text-slate-500 hover:bg-slate-100">
+            <HelpCircle size={13} />
+          </button>
 
-        <button className="w-7 h-7 rounded-full border border-slate-200 bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-slate-100">
-          <X size={14} />
-        </button>
-
-        <button className="w-7 h-7 rounded-full border border-slate-200 bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-slate-100">
-          <HelpCircle size={14} />
-        </button>
+        </div>
 
       </div>
 
     </header>
   );
-};
-
-export default AdminHeader;
+}
